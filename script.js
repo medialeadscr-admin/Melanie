@@ -177,7 +177,7 @@
     countdownTimer = setInterval(tick, 1000);
   }
 
-  if (isBirthdayToday(new Date())) {
+  if (window.FORCE_REVEAL === true || isBirthdayToday(new Date())) {
     revealCelebration();
   } else {
     startCountdown();
