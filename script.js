@@ -77,23 +77,40 @@
     for (let i = 0; i < 120; i++) burstPieces.push(makePiece(true));
   }
 
-  const cake = document.getElementById('cake');
-  const blowBtn = document.getElementById('blow-btn');
-  const wishMessage = document.getElementById('wish-message');
-
-  blowBtn.addEventListener('click', () => {
-    if (cake.classList.contains('blown')) return;
-    cake.classList.add('blown');
-    blowBtn.disabled = true;
-    blowBtn.textContent = '🎉 ¡Deseo pedido!';
-    wishMessage.textContent = '¡Feliz Cumpleaños, Melanie! Que se cumpla tu deseo. 🎂✨';
-    wishMessage.classList.add('show');
-    burstConfetti();
-  });
-
   // ---------- Birthday lock / countdown ----------
   const BIRTHDAY_MONTH = 10; // November (0-indexed)
   const BIRTHDAY_DAY = 14;
+
+  // The celebration markup is not present in the page source and is only
+  // decoded and inserted once the birthday date actually arrives, so it
+  // can't be read by viewing source / dev tools before the reveal.
+  const CELEBRATION_B64 =
+    'PGRpdiBjbGFzcz0iYmFsbG9vbnMiIGFyaWEtaGlkZGVuPSJ0cnVlIj4KICAgIDxzcGFuIGNsYXNzPSJiYWxsb29uIGIxIj7wn46IPC9zcGFuPgogICAgPHNwYW4gY2xhc3M9ImJhbGxvb24gYjIiPvCfjog8L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0iYmFsbG9vbiBiMyI+8J+OiDwvc3Bhbj4KICAgIDxzcGFuIGNsYXNzPSJiYWxsb29uIGI0Ij7wn46IPC9zcGFuPgogICAgPHNwYW4gY2xhc3M9ImJhbGxvb24gYjUiPvCfjog8L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0iYmFsbG9vbiBiNiI+8J+OiDwvc3Bhbj4KICA8L2Rpdj4KCiAgPG1haW4+CiAgICA8c2VjdGlvbiBjbGFzcz0iaGVybyI+CiAgICAgIDxwIGNsYXNzPSJleWVicm93Ij7inKggaG95IGVzIHR1IGTDrWEg4pyoPC9wPgogICAgICA8aDEgY2xhc3M9ImxvZ28iPk1lbGFuaWU8L2gxPgogICAgICA8cCBjbGFzcz0ic3VidGl0bGUiPsKhRmVsaXogQ3VtcGxlYcOxb3MhPC9wPgogICAgICA8cCBjbGFzcz0idGFnbGluZSI+UXVlIGVzdGUgbnVldm8gYcOxbyBlc3TDqSBsbGVubyBkZSByaXNhcywgc29ycHJlc2FzIHkgbW9tZW50b3MgaW5vbHZpZGFibGVzLjwvcD4KICAgIDwvc2VjdGlvbj4KCiAgICA8c2VjdGlvbiBjbGFzcz0iY2FrZS1zZWN0aW9uIj4KICAgICAgPGRpdiBjbGFzcz0iY2FrZSIgaWQ9ImNha2UiPgogICAgICAgIDxkaXYgY2xhc3M9ImZsYW1lIGYxIj48L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJmbGFtZSBmMiI+PC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0iZmxhbWUgZjMiPjwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9ImNhbmRsZSBjMSI+PC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0iY2FuZGxlIGMyIj48L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJjYW5kbGUgYzMiPjwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9ImxheWVyIHRvcCI+CiAgICAgICAgICA8c3BhbiBjbGFzcz0iY2hlcnJ5Ij7wn42SPC9zcGFuPgogICAgICAgIDwvZGl2PgogICAgICAgIDxkaXYgY2xhc3M9ImxheWVyIG1pZGRsZSI+PC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0ibGF5ZXIgYm90dG9tIj48L2Rpdj4KICAgICAgICA8ZGl2IGNsYXNzPSJwbGF0ZSI+PC9kaXY+CiAgICAgIDwvZGl2PgogICAgICA8YnV0dG9uIGlkPSJibG93LWJ0biIgY2xhc3M9ImJsb3ctYnRuIj7wn46CIFNvcGxhciBsYXMgdmVsYXM8L2J1dHRvbj4KICAgICAgPHAgaWQ9Indpc2gtbWVzc2FnZSIgY2xhc3M9Indpc2gtbWVzc2FnZSI+PC9wPgogICAgPC9zZWN0aW9uPgoKICAgIDxzZWN0aW9uIGNsYXNzPSJtZXNzYWdlIj4KICAgICAgPHA+RXNwZXJvIHF1ZSB0dSBkw61hIGVzdMOpIGxsZW5vIGRlIGFsZWdyw61hLCBidWVuYSBjb21wYcOxw61hIHkgdW4gcGFzdGVsIGRlbGljaW9zby48YnI+CiAgICAgIMKhUXVlIHNlIGN1bXBsYW4gdG9kb3MgdHVzIGRlc2VvcywgTWVsYW5pZSE8L3A+CiAgICA8L3NlY3Rpb24+CgogICAgPGZvb3Rlcj4KICAgICAgPHA+SGVjaG8gY29uIPCfkpwgcGFyYSBNZWxhbmllPC9wPgogICAgPC9mb290ZXI+CiAgPC9tYWluPg==';
+
+  function decodeCelebration(b64) {
+    const binary = atob(b64);
+    const percentEncoded = binary
+      .split('')
+      .map((c) => '%' + c.charCodeAt(0).toString(16).padStart(2, '0'))
+      .join('');
+    return decodeURIComponent(percentEncoded);
+  }
+
+  function wireCelebrationInteractions() {
+    const cake = document.getElementById('cake');
+    const blowBtn = document.getElementById('blow-btn');
+    const wishMessage = document.getElementById('wish-message');
+
+    blowBtn.addEventListener('click', () => {
+      if (cake.classList.contains('blown')) return;
+      cake.classList.add('blown');
+      blowBtn.disabled = true;
+      blowBtn.textContent = '🎉 ¡Deseo pedido!';
+      wishMessage.textContent = '¡Feliz Cumpleaños, Melanie! Que se cumpla tu deseo. 🎂✨';
+      wishMessage.classList.add('show');
+      burstConfetti();
+    });
+  }
 
   const countdownScreen = document.getElementById('countdown-screen');
   const celebration = document.getElementById('celebration');
@@ -119,6 +136,11 @@
 
   function revealCelebration() {
     if (countdownTimer) clearInterval(countdownTimer);
+    if (!celebration.dataset.filled) {
+      celebration.innerHTML = decodeCelebration(CELEBRATION_B64);
+      celebration.dataset.filled = 'true';
+      wireCelebrationInteractions();
+    }
     countdownScreen.hidden = true;
     celebration.hidden = false;
     burstConfetti();
@@ -156,8 +178,7 @@
   }
 
   if (isBirthdayToday(new Date())) {
-    countdownScreen.hidden = true;
-    celebration.hidden = false;
+    revealCelebration();
   } else {
     startCountdown();
   }
