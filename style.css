@@ -181,187 +181,98 @@ main{
   color:#5c4a72;
 }
 
-/* ---------- Cake ---------- */
-.cake-section{
-  margin-top:8vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.cake{
-  position:relative;
-  width:220px;
-  height:190px;
-  margin-bottom:18px;
-}
-
-.plate{
-  position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:240px;
-  height:14px;
-  border-radius:50%;
-  background:#e7dcff;
-  box-shadow:0 6px 10px rgba(0,0,0,.08);
-}
-
-.layer{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  border-radius:10px;
-}
-
-.layer.bottom{
-  bottom:14px;
-  width:200px;
-  height:58px;
-  background:linear-gradient(180deg,var(--pink),#ff4fa0);
-}
-.layer.bottom::before{
-  content:"";
-  position:absolute;
-  top:-8px;
-  left:0;
+/* ---------- Letter ---------- */
+.letter-section{
   width:100%;
-  height:16px;
-  border-radius:50%;
-  background:#ffe0f0;
-}
-
-.layer.middle{
-  bottom:70px;
-  width:160px;
-  height:46px;
-  background:linear-gradient(180deg,var(--purple),#6d34e0);
-}
-.layer.middle::before{
-  content:"";
-  position:absolute;
-  top:-7px;
-  left:0;
-  width:100%;
-  height:14px;
-  border-radius:50%;
-  background:#e3d3ff;
-}
-
-.layer.top{
-  bottom:112px;
-  width:120px;
-  height:36px;
-  background:linear-gradient(180deg,var(--gold),#ffb020);
+  padding:0 16px;
+  margin:8vh 0 6vh;
   display:flex;
-  align-items:flex-start;
   justify-content:center;
 }
-.layer.top::before{
-  content:"";
-  position:absolute;
-  top:-6px;
-  left:0;
-  width:100%;
-  height:12px;
-  border-radius:50%;
-  background:#fff1cf;
-}
-
-.cherry{
+.letter{
   position:relative;
-  top:-22px;
-  font-size:20px;
-}
-
-.candle{
-  position:absolute;
-  bottom:148px;
-  width:6px;
-  height:26px;
-  border-radius:2px;
-  background:repeating-linear-gradient(180deg,#fff 0 6px,#8fd3ff 6px 12px);
-}
-.candle.c1{left:78px;}
-.candle.c2{left:107px;}
-.candle.c3{left:136px;}
-
-.flame{
-  position:absolute;
-  bottom:172px;
-  width:10px;
-  height:16px;
-  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-  background:radial-gradient(circle at 50% 30%,#fff6c9,var(--gold) 60%,#ff8a3d 100%);
-  transform-origin:bottom center;
-  animation:flicker 1s ease-in-out infinite alternate;
-  transition:opacity .4s ease, transform .4s ease;
-}
-.flame.f1{left:76px;}
-.flame.f2{left:105px;}
-.flame.f3{left:134px;}
-
-@keyframes flicker{
-  0%{ transform:scaleY(1) rotate(-2deg); }
-  100%{ transform:scaleY(1.15) rotate(2deg); }
-}
-
-.cake.blown .flame{
+  width:100%;
+  max-width:560px;
+  padding:52px 40px 40px;
+  text-align:left;
+  font-family:'Lora',Georgia,serif;
+  font-size:17px;
+  line-height:1.85;
+  color:#4a3a5c;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0) 120px),
+    repeating-linear-gradient(180deg,transparent 0 30px,rgba(138,79,255,.06) 30px 31px),
+    #fffaf6;
+  border:1px solid #f1e2ef;
+  border-radius:18px;
+  box-shadow:0 24px 50px rgba(138,79,255,.16), 0 2px 6px rgba(58,42,77,.06);
   opacity:0;
-  transform:scaleY(0) translateY(6px);
+  transform:translateY(24px);
+  transition:opacity .9s ease, transform .9s ease;
 }
-
-.blow-btn{
-  font-family:'Poppins',Arial,sans-serif;
-  font-weight:600;
-  font-size:16px;
-  color:#fff;
-  background:linear-gradient(90deg,var(--pink),var(--purple));
-  border:none;
-  border-radius:100px;
-  padding:14px 28px;
-  cursor:pointer;
-  box-shadow:0 10px 20px rgba(138,79,255,.28);
-  transition:transform .15s ease, box-shadow .15s ease;
-}
-.blow-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 14px 24px rgba(138,79,255,.35);
-}
-.blow-btn:active{
-  transform:translateY(0);
-}
-.blow-btn:disabled{
-  opacity:.6;
-  cursor:default;
-  transform:none;
-}
-
-.wish-message{
-  min-height:28px;
-  margin:16px 0 0;
-  font-size:20px;
-  font-weight:700;
-  color:var(--purple);
-  opacity:0;
-  transform:translateY(6px);
-  transition:opacity .5s ease, transform .5s ease;
-}
-.wish-message.show{
+.letter.visible{
   opacity:1;
   transform:translateY(0);
 }
-
-/* ---------- Message ---------- */
-.message{
-  margin:9vh 0 6vh;
-  max-width:52ch;
+.letter-seal{
+  position:absolute;
+  top:-24px;
+  left:50%;
+  transform:translateX(-50%);
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  font-size:20px;
+  color:#fff;
+  background:radial-gradient(circle at 35% 30%,#ff9ccc,var(--pink) 55%,#d94a92);
+  box-shadow:0 6px 14px rgba(255,111,181,.45);
 }
-.message p{
-  font-size:17px;
-  line-height:1.7;
-  color:#5c4a72;
+.letter-greeting{
+  margin:0 0 22px;
+  text-align:center;
+  font-family:'Dancing Script',cursive;
+  font-weight:700;
+  font-size:34px;
+  line-height:1.3;
+  color:var(--purple);
+}
+.letter p{
+  margin:0 0 18px;
+}
+.letter-closing{
+  margin-top:28px !important;
+  margin-bottom:0 !important;
+  text-align:center;
+  font-family:'Dancing Script',cursive;
+  font-size:26px;
+  line-height:1.5;
+  color:#c2477f;
+}
+
+.letter-signature{
+  margin:22px 0 0 !important;
+  text-align:right;
+  font-family:'Dancing Script',cursive;
+  font-weight:700;
+  font-size:30px;
+  color:var(--purple);
+}
+
+@media (max-width:700px){
+  .letter{
+    padding:44px 22px 30px;
+    font-size:16px;
+    line-height:1.8;
+  }
+  .letter-greeting{font-size:30px;}
+  .letter-closing{font-size:23px;}
+  .letter-signature{font-size:27px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .letter{opacity:1;transform:none;transition:none;}
 }
 
 footer{
@@ -372,7 +283,6 @@ footer{
 
 @media (max-width:700px){
   .hero{padding-top:7vh;}
-  .cake-section{margin-top:6vh;}
   .balloon{font-size:40px;}
 
   .countdown{
@@ -380,4 +290,39 @@ footer{
     grid-template-columns:repeat(2,78px);
     justify-content:center;
   }
+}
+
+/* ---------- Birthday video ---------- */
+.video-section{
+  margin-top:6vh;
+  padding:0 16px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+.birthday-video{
+  display:block;
+  width:auto;
+  max-width:min(420px,100%);
+  max-height:80vh;
+  border-radius:20px;
+  background:#000;
+  box-shadow:0 20px 40px rgba(138,79,255,.25);
+}
+
+/* ---------- Photo ---------- */
+.photo-section{
+  margin-top:5vh;
+  padding:0 16px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+.birthday-photo{
+  display:block;
+  width:100%;
+  max-width:420px;
+  height:auto;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(138,79,255,.25);
 }
